@@ -240,6 +240,9 @@ button:active {
     .container {
         margin: 8.31rem auto;
     }
+    h1 {
+        font-size: var(--desktop-primary-font-size);
+    }
     .output, .input {
         padding: 2rem;
     }
