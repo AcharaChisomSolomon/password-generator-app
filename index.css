@@ -42,17 +42,13 @@ body {
     font-family: var(--font-family);
     background: var(--body-bg);
     color: var(--primary-text-color);
-    min-height: 100vh;
     font-size: var(--mobile-primary-font-size);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
 }
 .container {
     width: 100%;
     max-width: 33.75rem;
-    margin: 0 auto;
+    margin: 4rem auto;
     padding: 0 1rem;
     /* border: 1px solid red; */
 }
@@ -240,6 +236,9 @@ button:active {
 @media only screen and (min-width: 33.75rem) {
     body, button {
         font-size: var(--desktop-primary-font-size);
+    }
+    .container {
+        margin: 8.31rem auto;
     }
     .output, .input {
         padding: 2rem;
