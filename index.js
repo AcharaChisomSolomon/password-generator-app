@@ -10,30 +10,58 @@ const numberCheckBox = document.getElementById('numbers')
 const symbolCheckBox = document.getElementById('symbols')
 const generateBtn = document.getElementById('generate')
 
-const bars = document.querySelectorAll('.bar')
+const bars = document.getElementById('bars')
 const barText = document.getElementById('bar-text')
 
 const numbers = '0123456789'
 const upperLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const lowerLetters = 'abcdefghijklmnopqrstuvwxyz'
 const symbols = '!@#$%^&*()_+'
+const strengthObject = {
+    1: ['too weak!', 'level1'],
+    2: ['weak', 'level2'],
+    3: ['medium', 'level3'],
+    4: ['strong', 'level4']
+}
 const defaultPassword = passwordDisplay.textContent
 let currentPassword = defaultPassword
 
+const defaultBars = () => {
+    barText.textContent = ''
+    bars.innerHTML = ''
+    for (let i = 0; i < 4; i++) {
+        bars.innerHTML += `<div class="bar"></div>`
+    }
+}
+
+const updateBars = level => {
+    barText.textContent = strengthObject[level][0]
+    bars.innerHTML = ''
+    for (let i = 0; i < 4; i++) {
+        if (i >= level) {
+            bars.innerHTML += `<div class="bar"></div>`
+            continue
+        }
+        bars.innerHTML += `<div class="bar ${strengthObject[level][1]}"></div>`
+    }
+}
+
 const isInDefaultState = () => {
-    return passwordLength.value === '0' || (!upperCheckBox.checked && !lowerCheckBox.checked && !numberCheckBox.checked && !symbolCheckBox.checked)
+    const isDefault = passwordLength.value === '0' || (!upperCheckBox.checked && !lowerCheckBox.checked && !numberCheckBox.checked && !symbolCheckBox.checked)
+    if (isDefault) {
+        defaultBars()
+    }
+    return isDefault
 }
 
 const calculatePasswordStrength = password => {
     let strength = 0;
 
-    if (password.length >= 10) {
+    if (password.length >= 8) {
         strength++;
     }
-    if (/[A-Z]/.test(password)) {
-        strength++;
-    }
-    if (/[a-z]/.test(password)) {
+
+    if (/[A-Z]/.test(password) || /[a-z]/.test(password)) {
         strength++;
     }
     if (/[0-9]/.test(password)) {
@@ -93,6 +121,7 @@ const displayPassword = () => {
     currentPassword = generatePassword()
     passwordDisplay.textContent = currentPassword
     passwordDisplay.style.opacity = 1
+    updateBars(calculatePasswordStrength(currentPassword))
 }
 
 copyBtn.addEventListener('click', function () {

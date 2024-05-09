@@ -197,6 +197,18 @@ input[type="checkbox"]:checked + label:before {
     height: 1.75rem;
     border: 2px solid var(--primary-text-color);
 }
+.level1 {
+    background-color: var(--color-strength-level-1);
+}
+.level2 {
+    background-color: var(--color-strength-level-2);
+}
+.level3 {
+    background-color: var(--color-strength-level-3);
+}
+.level4 {
+    background-color: var(--color-strength-level-4);
+}
 
 
 button {
